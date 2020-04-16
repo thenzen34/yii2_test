@@ -1,0 +1,16 @@
+composer create-project --prefer-dist --no-dev --stability=dev yiisoft/yii2-app-advanced yii2_test
+cd yii2_test/
+git init
+git add .
+php init
+?composer install
+
+./yii migrate/create create_notes_table --fields="title:string,description:text"
+./yii migrate
+./yii gii/module --moduleID=v1 --moduleClass="backend\modules\v1\Module"
+./yii gii/model --tableName=notes --modelClass=Notes --ns="common\models\db" --queryNs="common\models\db\query" --queryClass="NotesQuery" --generateQuery=1
+
+
+
+
+./yii serve --docroot="@frontend/web"
