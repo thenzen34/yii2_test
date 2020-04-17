@@ -10,10 +10,19 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    // доступ к бекенду как к текущему сайту доступен через ajax запросы
+    'modules' => [
+        'v1' => [
+            'class' => backend\modules\v1\Module::class,
+        ],
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -40,6 +49,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'v1/api',
+                        'v1/notes',
+                    ]
+                ],
             ],
         ],
     ],

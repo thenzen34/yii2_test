@@ -33,6 +33,7 @@ class Notes extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['create_at'], 'safe'],
             [['favorite'], 'boolean'],
+            ['favorite', 'default', 'value' => false],
             [['title'], 'string', 'max' => 250],
         ];
     }

@@ -10,6 +10,10 @@ php init
 ./yii gii/module --moduleID=v1 --moduleClass="backend\modules\v1\Module"
 ./yii gii/model --tableName=notes --modelClass=Notes --ns="common\models\db" --queryNs="common\models\db\query" --queryClass="NotesQuery" --generateQuery=1
 
+./yii gii/controller --controllerClass="backend\modules\v1\controllers\NotesController" --baseClass="yii\rest\ActiveController" --actions=""
+
+
+curl -X POST -i -H "Accept:application/json" http://back.yii2test.local/v1/api/ping
 
 
 

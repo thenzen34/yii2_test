@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    // доступ к бекенду как к стороннему сайту будет доступен через php lib
     'modules' => [
         'v1' => [
             'class' => backend\modules\v1\Module::class,
@@ -52,6 +53,7 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'v1/api',
+                        'v1/notes',
                     ]
                 ],
             ],

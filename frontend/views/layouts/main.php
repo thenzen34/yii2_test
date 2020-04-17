@@ -26,6 +26,10 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<?= $this->render('_modal_busy', [
+]);
+?>
+
 <div class="wrap">
     <?php
     NavBar::begin([

@@ -118,3 +118,31 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/* ajax_busy */
+
+.modal_busy_container {
+    background: rgba(255, 255, 255, 0.3);
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 40px 0;
+    z-index: 2000;
+    display: none;
+}
+
+.modal_busy {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#ajax_busy .glyphicon {
+    font-size: 50px;
+}
+
+.favorite {
+    color:gold;
+}
