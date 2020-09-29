@@ -1,4 +1,106 @@
 $(function () {
+    var s1 = $("#select1");
+    var s2 = $("#select2");
+    var s3 = $("#select3");
+
+    $(s1).select2({
+        //minimumInputLength: 2,
+        tags: [],
+        placeholder: "Select a state1",
+        allowClear: true,
+        ajax: {
+            url: '/v1/select2/search1',
+            dataType: 'json',
+            type: "GET",
+
+            data: function (params) {
+                var query = {
+                    search: params.term
+                }
+
+                // Query parameters will be ?search=[term]&page=[page]
+                return query;
+            },
+
+        }
+    });
+
+    $(s2).select2({
+        //minimumInputLength: 2,
+        tags: [],
+        placeholder: "Select a state2",
+        allowClear: true,
+        ajax: {
+            url: '/v1/select2/search2',
+            dataType: 'json',
+            type: "GET",
+
+            data: function (params) {
+                var query = {
+                    search: params.term,
+                    s1: $(s1).val()
+                }
+
+                // Query parameters will be ?search=[term]&page=[page]
+                return query;
+            },
+
+        }
+    });
+
+    $(s3).select2({
+        //minimumInputLength: 2,
+        tags: [],
+        placeholder: "Select a state3",
+        allowClear: true,
+        ajax: {
+            url: '/v1/select2/search3',
+            dataType: 'json',
+            type: "GET",
+
+            data: function (params) {
+                var query = {
+                    search: params.term,
+                    s2: $(s2).val()
+                }
+
+                // Query parameters will be ?search=[term]&page=[page]
+                return query;
+            },
+
+        }
+    });
+
+    $(s1).on('select2:select', function (e) {
+        var val = $(this).val();
+
+        if (val > 0) {
+            $(s2).prop('disabled', false);
+        } else {
+            $(s2).val(-1).trigger('change');
+            $(s2).prop('disabled', true);
+        }
+    });
+
+    $(s2).on('select2:select', function (e) {
+        var val = $(this).val();
+
+        if (val > 0) {
+            $(s3).prop('disabled', false);
+        } else {
+            $(s3).val(-1).trigger('change');
+            $(s3).prop('disabled', true);
+        }
+    });
+
+    $(s1).on('select2:clearing', function (e) {
+        $(s2).prop('disabled', true);
+    });
+
+    $(s2).on('select2:clearing', function (e) {
+        $(s3).prop('disabled', true);
+    });
+
     var ajax_busy = $('#ajax_busy');
     var notesApi = Vue.resource('/v1/notes{/id}');
 
